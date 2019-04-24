@@ -12,6 +12,7 @@ public class Excepcion4 {
         }
         catch(IOException error)
         {
+        	System.err.println("No has escrito nada");
         }
 
     }

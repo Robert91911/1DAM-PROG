@@ -64,14 +64,12 @@ public class CopiarFichero {
 		try {
 			fis = new FileInputStream(file);
 			fos = new FileOutputStream(copia);
+			//No funciona por esto
+			int b = 0; //b es donde apunta el puntero de lectura empezando en 0
+			while((b = fis.read()) != -1) //Siendo -1 el final del fichero
 			{
-				//No funciona por esto
-				int b = 0; //b es donde apunta el puntero de lectura empezando en 0
-				while((b = fis.read()) != -1) //Siendo -1 el final del fichero
-				{
 				fos.write(b);	
 				//fos.write(fis.read()); Esto no funciona!, se queda en la mitad del fichero
-				}
 			}
 		} catch (IOException e) {
 			System.out.println("Excepción: " + e.getMessage());
@@ -83,7 +81,6 @@ public class CopiarFichero {
 				System.out.println("Excepción: " + e.getMessage());
 			}
 		}
-		
 		System.out.println("\nArchivo guardado y programa terminado");
 	}
 	
@@ -92,9 +89,9 @@ public class CopiarFichero {
 	
 	}
 	class  ParametrosException extends Exception{
-	public ParametrosException() 
-	{
-		super();
-	}
+		public ParametrosException() 
+		{
+			super();
+		}
 	}
 	

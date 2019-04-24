@@ -24,7 +24,7 @@ public class EsNumeroPerfecto
 		}
 		catch(NumberFormatException e)
 		{
-			System.out.println("Error: no es un numero perfecto.");
+			System.out.println("Error: no es un numero entero.");
 		}
 	}
 

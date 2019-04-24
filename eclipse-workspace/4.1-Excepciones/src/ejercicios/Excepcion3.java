@@ -14,6 +14,7 @@ public class Excepcion3 {
         }
         catch (IOException ex)
         {
+        	System.out.println("Error");
         }
 
      }
