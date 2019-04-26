@@ -9,6 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
  
+/**
+ * 
+ * @author robert
+ *
+ */
 public class Controller implements ActionListener,
                                     MouseListener {
     private View view;
