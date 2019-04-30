@@ -60,8 +60,7 @@ public class View extends JFrame {
         //ETIQUETA NOMBRE
         lblNombre = new JLabel("Nombre:");  //Crear el objeto
         contenedor.add(lblNombre);      //Añadirlo al contenedor
-        sp.putConstraint(SpringLayout.NORTH, lblNombre, 10,
-                        SpringLayout.NORTH, contenedor);
+        sp.putConstraint(SpringLayout.NORTH, lblNombre, 10, SpringLayout.NORTH, contenedor);
         sp.putConstraint(SpringLayout.WEST, lblNombre,  10,
                         SpringLayout.WEST, contenedor);
         //ETIQUETA APELLIDOS
