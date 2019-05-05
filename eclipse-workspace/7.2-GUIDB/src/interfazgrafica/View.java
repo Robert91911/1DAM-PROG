@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SpringLayout;
 import javax.swing.table.DefaultTableModel;
 
@@ -60,15 +61,13 @@ public class View extends JFrame {
 	//CONSTRUCTOR
 	View(){
 		//Métodos del JFrame
-		setBounds(100,100,450,300); //Dimensiones de la ventana
+		setBounds(100,100,600,300); //Dimensiones de la ventana
 		setTitle("BASE DE DATOS CON ENTORNO GRÁFICO"); //Barra de título
 		setDefaultCloseOperation(EXIT_ON_CLOSE); //Accion a pulsar en salir
 		
 		login = new JPanel();
-		getContentPane().add(login);
 		
 		contenedor = new JPanel();
-		getContentPane().add(contenedor);
 		
 		//CREAR EL CONTENEDOR PRINCIPAL Y AÑADIRLO A LA VENTANA
 		SpringLayout sp = new SpringLayout();
@@ -78,13 +77,13 @@ public class View extends JFrame {
 		/************************ ETIQUETAS ************************/
 		lbusuario = new JLabel("Usuario:");
 		login.add(lbusuario);
-		sp.putConstraint(SpringLayout.NORTH, lbnombre, 10, SpringLayout.NORTH, login);
-		sp.putConstraint(SpringLayout.WEST, lbnombre, 10, SpringLayout.WEST, login);
+		sp.putConstraint(SpringLayout.NORTH, lbusuario, 50, SpringLayout.NORTH, login);
+		sp.putConstraint(SpringLayout.WEST, lbusuario, 130, SpringLayout.WEST, login);
 
 		lbcontrasenya = new JLabel("Contraseña:");
 		login.add(lbcontrasenya);
-		sp.putConstraint(SpringLayout.NORTH, lbcontrasenya, 50, SpringLayout.NORTH, login);
-		sp.putConstraint(SpringLayout.WEST, lbcontrasenya, 10, SpringLayout.NORTH, login);
+		sp.putConstraint(SpringLayout.NORTH, lbcontrasenya, 90, SpringLayout.NORTH, login);
+		sp.putConstraint(SpringLayout.WEST, lbcontrasenya, 130, SpringLayout.NORTH, login);
 		
 		lbdni = new JLabel("DNI:");
 		contenedor.add(lbdni);
@@ -103,21 +102,21 @@ public class View extends JFrame {
 				
 		lbedad = new JLabel("Edad:");
 		contenedor.add(lbedad);
-		sp.putConstraint(SpringLayout.NORTH, lbedad, 120, SpringLayout.NORTH, contenedor);
+		sp.putConstraint(SpringLayout.NORTH, lbedad, 130, SpringLayout.NORTH, contenedor);
 		sp.putConstraint(SpringLayout.WEST, lbedad, 10, SpringLayout.WEST, contenedor);
 		
 		/************************ CUADROS TXT ************************/
 		txtUsuario = new JTextField();
 		login.add(txtUsuario);
-        sp.putConstraint(SpringLayout.NORTH, txtUsuario, 10, SpringLayout.NORTH, login);
-		sp.putConstraint(SpringLayout.WEST, txtUsuario, 100, SpringLayout.WEST, login);
-		sp.putConstraint(SpringLayout.EAST, txtUsuario, 300, SpringLayout.WEST, login);
+        sp.putConstraint(SpringLayout.NORTH, txtUsuario, 50, SpringLayout.NORTH, login);
+		sp.putConstraint(SpringLayout.WEST, txtUsuario, 240, SpringLayout.WEST, login);
+		sp.putConstraint(SpringLayout.EAST, txtUsuario, 430, SpringLayout.WEST, login);
 		
 		txtContrasenya = new JTextField();
 		login.add(txtContrasenya);
-        sp.putConstraint(SpringLayout.NORTH, txtContrasenya, 50, SpringLayout.NORTH, login);
-		sp.putConstraint(SpringLayout.WEST, txtContrasenya, 100, SpringLayout.WEST, login);
-		sp.putConstraint(SpringLayout.EAST, txtContrasenya, 300, SpringLayout.WEST, login);
+        sp.putConstraint(SpringLayout.NORTH, txtContrasenya, 90, SpringLayout.NORTH, login);
+		sp.putConstraint(SpringLayout.WEST, txtContrasenya, 240, SpringLayout.WEST, login);
+		sp.putConstraint(SpringLayout.EAST, txtContrasenya, 430, SpringLayout.WEST, login);
 		
 		txtDNI = new JTextField();
 		contenedor.add(txtDNI);
@@ -139,7 +138,7 @@ public class View extends JFrame {
 		
 		txtEdad = new JTextField();
 		contenedor.add(txtEdad);
-        sp.putConstraint(SpringLayout.NORTH, txtEdad, 120, SpringLayout.NORTH, contenedor);
+        sp.putConstraint(SpringLayout.NORTH, txtEdad, 130, SpringLayout.NORTH, contenedor);
 		sp.putConstraint(SpringLayout.WEST, txtEdad, 100, SpringLayout.WEST, contenedor);
 		sp.putConstraint(SpringLayout.EAST, txtEdad, 300, SpringLayout.WEST, contenedor);
 		
@@ -151,7 +150,7 @@ public class View extends JFrame {
 		scroll.setViewportView(tabla);
 		//Colocacion del scroll pane
 		contenedor.add(scroll);
-        sp.putConstraint(SpringLayout.NORTH, scroll, 120, SpringLayout.NORTH, contenedor);
+        sp.putConstraint(SpringLayout.NORTH, scroll, 170, SpringLayout.NORTH, contenedor);
 		sp.putConstraint(SpringLayout.WEST, scroll,10, SpringLayout.WEST, contenedor);
 		sp.putConstraint(SpringLayout.EAST, scroll,  -10, SpringLayout.EAST, contenedor);
 		sp.putConstraint(SpringLayout.SOUTH, scroll, -50, SpringLayout.SOUTH, contenedor);
@@ -159,37 +158,64 @@ public class View extends JFrame {
 		/************************ BOTONES ************************/
 		btConectar = new JButton("Conectar");
 		login.add(btConectar);
-        sp.putConstraint(SpringLayout.SOUTH, btConectar,-10, SpringLayout.SOUTH, login);
-        sp.putConstraint(SpringLayout.WEST, btConectar, 50, SpringLayout.WEST, login);
+        sp.putConstraint(SpringLayout.SOUTH, btConectar,-100, SpringLayout.SOUTH, login);
+        sp.putConstraint(SpringLayout.WEST, btConectar, 250, SpringLayout.WEST, login);
         
 		btInsertar = new JButton("Insetar");
-		login.add(btInsertar);
+		contenedor.add(btInsertar);
         sp.putConstraint(SpringLayout.SOUTH, btInsertar, -10, SpringLayout.SOUTH, contenedor);
-        sp.putConstraint(SpringLayout.WEST, btInsertar, 100, SpringLayout.WEST, contenedor);
+        sp.putConstraint(SpringLayout.WEST, btInsertar, 40, SpringLayout.WEST, contenedor);
         
 		btListado = new JButton("Listar");
-		login.add(btListado);
+		contenedor.add(btListado);
         sp.putConstraint(SpringLayout.SOUTH, btListado, -10, SpringLayout.SOUTH, contenedor);
-        sp.putConstraint(SpringLayout.WEST, btListado, 150, SpringLayout.WEST, contenedor);
+        sp.putConstraint(SpringLayout.WEST, btListado, 140, SpringLayout.WEST, contenedor);
         
 		btBorrar = new JButton("Borrar");
-		login.add(btBorrar);
+		contenedor.add(btBorrar);
         sp.putConstraint(SpringLayout.SOUTH, btBorrar, -10, SpringLayout.SOUTH, contenedor);
-        sp.putConstraint(SpringLayout.WEST, btBorrar, 200, SpringLayout.WEST, contenedor);
+        sp.putConstraint(SpringLayout.WEST, btBorrar, 240, SpringLayout.WEST, contenedor);
         
 		btModificar = new JButton("Modificar");
-		login.add(btModificar);
+		contenedor.add(btModificar);
         sp.putConstraint(SpringLayout.SOUTH, btModificar, -10, SpringLayout.SOUTH, contenedor);
-        sp.putConstraint(SpringLayout.WEST, btModificar, 250, SpringLayout.WEST, contenedor);
+        sp.putConstraint(SpringLayout.WEST, btModificar, 340, SpringLayout.WEST, contenedor);
         
 		btSalir = new JButton("Salir");
-		login.add(btSalir);
+		contenedor.add(btSalir);
         sp.putConstraint(SpringLayout.SOUTH, btSalir, -10, SpringLayout.SOUTH, contenedor);
-        sp.putConstraint(SpringLayout.WEST, btSalir, 300, SpringLayout.WEST, contenedor);
-        
+        sp.putConstraint(SpringLayout.WEST, btSalir, 460, SpringLayout.WEST, contenedor);
+        add(contenedor);
         //Hacemos visible la ventana
         setVisible(true);
-        
+       
 	}
-
+	
+	public void conectarControlador(Controller c) {
+		//LOGIN
+		btConectar.addActionListener(c);
+		btConectar.setActionCommand("CONECTAR");
+		//INSERTAR
+		btInsertar.addActionListener(c);
+		btInsertar.setActionCommand("INSERTAR");
+		//LISTAR
+		btListado.addActionListener(c);
+		btListado.setActionCommand("LISTAR");
+		//BORRAR
+		btBorrar.addActionListener(c);
+		btBorrar.setActionCommand("BORRAR");
+		//MODIFICAR
+		btModificar.addActionListener(c);
+		btModificar.setActionCommand("MODIFICAR");
+		//SALIR
+		btSalir.addActionListener(c);
+		btSalir.setActionCommand("SALIR");
+		//TABLA
+		tabla.addMouseListener(c);
+		tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	}
+	
+	public void verOperaciones(){
+		add(contenedor);
+	}
 }
