@@ -2,7 +2,10 @@ package interfazgrafica;
 
 import java.util.Scanner;
 
+import operacionesdb.ObBorrado;
+import operacionesdb.ObConsulta;
 import operacionesdb.ObInsercion;
+import operacionesdb.ObModificacion;
 import operacionesdb.ObRegistro;
 
 public class Abrir {
@@ -17,9 +20,16 @@ static Scanner sc = new Scanner(System.in);
 		 //registro.setApellido("Amariutei");
 		 //registro.setEdad(20);
 		 //ObInsercion insertar = new ObInsercion(registro);
-		 //insertar.insertar();
+		
+		 /****************PRUEBAS BUSCAR***************************/
+		 ObConsulta consulta = new ObConsulta("50858949M");
+		 consulta.buscar();
+		 System.out.println(consulta.posicionEncontrada());
 		 
-		 /****************PRUEBAS MODIFICACION***************************/
-		 
+		 /****************PRUEBAS MODIFICAR***************************/
+		 //ObRegistro datos = new ObRegistro("X9197651L", "Modificacion", "Amariutei", 12);
+		 //ObModificacion modi = new ObModificacion(2, datos);
+		 /****************PRUEBAS BORRAR***************************/
+		 //ObBorrado borrar = new ObBorrado(6);
 	}
 }

@@ -14,43 +14,26 @@ import java.sql.Statement;
  */
 
 public class ObInsercion {
-
-	private DatosConexion datConex = new DatosConexion();
-	private ObRegistro registro = new ObRegistro(); 
 	
 	public ObInsercion(ObRegistro registro) {
-		this.registro = registro;
-	}
-	
-	public void insertar() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String BaseDeDatos = "DATOS";
-			Connection Conexion = DriverManager.getConnection(datConex.getUrl(), datConex.getLogin(), datConex.getPassword());
-			Statement SentenciaSQL = Conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_UPDATABLE);
-			ResultSet Personas = SentenciaSQL.executeQuery("SELECT * FROM DatosPersonales");
-
-			Personas.moveToInsertRow();
-			Personas.updateString("DNI", registro.getDni());
-			Personas.updateString("Nombre", registro.getNombre());
-			Personas.updateString("Apellido", registro.getApellido());
-			Personas.updateInt("Edad", registro.getEdad());
-			Personas.insertRow();
-			// Personas.moveToCurrentRow();
-
-			Personas.close();
-			Conexion.close();
-			SentenciaSQL.close();
-		} catch (ClassNotFoundException e) {
-			System.out.println("Clase no encontrada");
+			Statement conexion = Bd.getConexion().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+			
+			ResultSet personas = conexion.executeQuery("SELECT * FROM DatosPersonales");
+			
+			personas.moveToInsertRow();
+			personas.updateString("DNI", registro.getDni());
+			personas.updateString("Nombre", registro.getNombre());
+			personas.updateString("Apellido", registro.getApellido());
+			personas.updateInt("Edad", registro.getEdad());
+			personas.insertRow();
+			
+			personas.close();
+			conexion.close();
 		} catch (SQLException e) {
 			System.out.println(e);
 		}
 	}
 	
-	//MÉTODOS
-	//moveToInsertRow
-	
-	//insertRow
 }
+	
