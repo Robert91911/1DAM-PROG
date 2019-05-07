@@ -3,43 +3,34 @@ package operacionesdb;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
- 
+
+import javax.swing.JOptionPane;
+
 public class Bd {
-    private String  maquina     = "localhost";
-    private String  usuario     = "robert9191";
-    private String  clave       = "Clave_00";
+
+	private String  maquina     = "localhost";
+	public String  usuario     		= "robert9191";
+	public String  clave       		= "Clave_00";
     private int puerto          = 3306;
     private String  servidor    = "";
     private static Connection conexion  = null;
- 
-    //CONSTRUCTOR
-    //Recibe el nombre de la base de datos
-    Bd(String baseDatos){
-        this.servidor="jdbc:mysql://"+this.maquina+":"+
-                        this.puerto+"/"+baseDatos;
- 
-        //Registrar el driver
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            System.err.println("ERROR AL REGISTRAR EL DRIVER");
-            System.exit(0); //parar la ejecución
-        }
- 
-        //Establecer la conexión con el servidor
-        try {
-            conexion = DriverManager.getConnection(this.servidor,
-                        this.usuario, this.clave);
-        } catch (SQLException e) {
-            System.err.println("ERROR AL CONECTAR CON EL SERVIDOR");
-            System.exit(0); //parar la ejecución
-        }
-        System.out.println("Conectado a "+baseDatos);
+    
+    public Bd(){
+    	try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println("Driver no encontrado " + e.getMessage());
+			System.exit(-1);
+		}
+		try {
+			conexion = DriverManager.getConnection(
+					   "jdbc:mysql://localhost:3306/DATOS", "robert9191", "Clave_00");
+		} catch (SQLException e) {
+			JOptionPane panel = new JOptionPane("Error base de datos");
+		}
     }
- 
-    //Devuelve el objeto Connection que se usará en la clase Controller
-    public static Connection getConexion() {
-        return conexion;
-    }
- 
+	
+	public static Connection getConexion(){
+		return conexion;
+	}
 }

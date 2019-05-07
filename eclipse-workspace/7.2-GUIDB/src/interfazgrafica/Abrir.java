@@ -12,6 +12,8 @@ public class Abrir {
 static Scanner sc = new Scanner(System.in);
 	public static void main(String[] args) {
 		 View vista  = new View();
+		 Controller contr = new Controller(vista);
+		 vista.conectarControlador(contr);
 		 
 		 /****************PRUEBAS INSERCION***************************/
 		 //ObRegistro registro = new ObRegistro();
@@ -22,9 +24,9 @@ static Scanner sc = new Scanner(System.in);
 		 //ObInsercion insertar = new ObInsercion(registro);
 		
 		 /****************PRUEBAS BUSCAR***************************/
-		 ObConsulta consulta = new ObConsulta("50858949M");
-		 consulta.buscar();
-		 System.out.println(consulta.posicionEncontrada());
+		 //ObConsulta consulta = new ObConsulta("50858949M");
+		 //consulta.buscar();
+		 //System.out.println(consulta.posicionEncontrada());
 		 
 		 /****************PRUEBAS MODIFICAR***************************/
 		 //ObRegistro datos = new ObRegistro("X9197651L", "Modificacion", "Amariutei", 12);
