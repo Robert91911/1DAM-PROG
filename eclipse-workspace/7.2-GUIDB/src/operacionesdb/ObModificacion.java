@@ -14,46 +14,27 @@ import java.sql.Statement;
  */
 
 public class ObModificacion {
-
-	private DatosConexion conexion = new DatosConexion();
-	private int posicionDelRegistro;
-	private ObRegistro datos = new ObRegistro();
 	
 	public ObModificacion(int posicionDelRegistro, ObRegistro datos) {
-		this.posicionDelRegistro = posicionDelRegistro;
-		this.datos = datos;
-		modificar();
-	}
-	
-	public void modificar() {
-		String Nombre, Apellido, DNI;
-		int Edad;
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String BaseDeDatos = "DATOS";
-			Connection Conexion = DriverManager.getConnection(conexion.getUrl(), conexion.getLogin(), conexion.getPassword());
-			Statement SentenciaSQL = Conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_UPDATABLE);
-			ResultSet Personas = SentenciaSQL.executeQuery("SELECT * FROM DatosPersonales");
+		try{
+			//Creo el Statement con la conexion realizada desde la Bd creada
+			Statement stmt = Bd.getConexion().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
 			
-			Personas.absolute(posicionDelRegistro);
-				Nombre = Personas.getString("Nombre");
-				Apellido = Personas.getString("Apellido");
+			//Ejecuto una consulta sql y la almaceno
+			ResultSet resultadoConsulta = stmt.executeQuery("SELECT * FROM DatosPersonales");
+			
+			//Realizo un bucle while y voy directamente a la posicion proporcionada
+			resultadoConsulta.absolute(posicionDelRegistro);
+			resultadoConsulta.updateString("DNI", datos.getDni());
+			resultadoConsulta.updateString("Nombre", datos.getNombre());
+			resultadoConsulta.updateString("Apellido", datos.getApellido());
+			resultadoConsulta.updateInt("Edad", datos.getEdad());
+			resultadoConsulta.updateRow();
 
-					Personas.updateString("Nombre", datos.getNombre());
-					Personas.updateString("Apellido", datos.getApellido());
-					Personas.updateInt("Edad", datos.getEdad());
-					Personas.updateString("DNI", datos.getDni());
-					Personas.updateRow();
-					System.out.println("Registro modificado");
-
-			Personas.close();
-			Conexion.close();
-			SentenciaSQL.close();
-		} catch (ClassNotFoundException e) {
-			System.out.println("Clase no encontrada");
-		} catch (SQLException e) {
-			System.out.println(e);
-		}
+			resultadoConsulta.close();
+			stmt.close();
+		}catch(SQLException e){
+			System.out.println("Error de base de datos " + e.getMessage());
+		};
 	}
 }

@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JOptionPane;
+
 /**
  * Esta clase recibe la posicionBuscada y con esa posicion borra esa fila
  * de la base de datos
@@ -14,7 +16,6 @@ import java.sql.Statement;
  */
 
 public class ObBorrado {
-	private DatosConexion conexion = new DatosConexion();
 	int posicionBuscada;
 	
 	public ObBorrado(int posicionBuscada) {
@@ -23,28 +24,22 @@ public class ObBorrado {
 	}
 
 	private void borrar() {
-		String Nombre, Apellido;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String BaseDeDatos = "DATOS";
-			Connection Conexion = DriverManager.getConnection(conexion.getUrl(), conexion.getLogin(), conexion.getPassword());
-			Statement SentenciaSQL = Conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_UPDATABLE);
-			ResultSet Personas = SentenciaSQL.executeQuery("SELECT * FROM DatosPersonales");
-
+			//Creo el Statement con la conexion realizada desde la Bd creada
+			Statement stmt = Bd.getConexion().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
 			
-			Personas.absolute(posicionBuscada);
-				System.out.println("Registro eliminado");
-				Personas.deleteRow();
-				
-			Personas.close();
-			Conexion.close();
-			SentenciaSQL.close();
-		} catch (ClassNotFoundException e) {
-			System.out.println("Clase no encontrada");
+			//Ejecuto una consulta sql y la almaceno
+			ResultSet resultadoConsulta = stmt.executeQuery("SELECT * FROM DatosPersonales");
+			
+			//Nos situamos en la posicion del registro que queremos eliminar
+			resultadoConsulta.absolute(posicionBuscada);
+			resultadoConsulta.deleteRow();
+			
+			//Cierro la consulta y el statement
+			resultadoConsulta.close();
+			stmt.close();
 		} catch (SQLException e) {
-			System.out.println(e);
+			JOptionPane panel = new JOptionPane("Error base de datos " + e.getMessage());
 		}
-		
 	}
 }

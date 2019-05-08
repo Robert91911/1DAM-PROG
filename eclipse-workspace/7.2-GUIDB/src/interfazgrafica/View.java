@@ -22,47 +22,49 @@ import javax.swing.table.DefaultTableModel;
 public class View {
 	/******************************** ATRIBUTOS ********************************/
 	//VENTANA
-	JFrame ventana;
+	public JFrame ventana;
 	
 	//Container contenedor;
 	
 	//panelOperaciones PRINCIPAL
-	JPanel panelOperaciones;
-	JPanel login;
+	public JPanel panelOperaciones;
+	public JPanel login;
 	
 	//DEFINICION DE LAS ETIQUETAS
-	JLabel lbusuario;
-	JLabel lbcontrasenya;
+	public JLabel lbusuario;
+	public JLabel lbcontrasenya;
 	
-	JLabel lbdni;
-	JLabel lbnombre;
-	JLabel lbapellido;
-	JLabel lbedad;
+	public JLabel lbdni;
+	public JLabel lbnombre;
+	public JLabel lbapellido;
+	public JLabel lbedad;
 	
 	//DEFINICION DE LOS CUADROS DE TEXTO
-	JTextField txtUsuario;
-	JTextField txtContrasenya;
+	public JTextField txtUsuario;
+	public JTextField txtContrasenya;
 
-	JTextField txtDNI;
-	JTextField txtNombre;
-	JTextField txtApellido;
-	JTextField txtEdad;
+	public JTextField txtDNI;
+	public JTextField txtNombre;
+	public JTextField txtApellido;
+	public JTextField txtEdad;
 
 	//DEFINICION DE LOS BOTONES
-	JButton btConectar;
+	public JButton btConectar;
 
-	JButton btInsertar;
-	JButton btListado;
-	JButton btBorrar;
-	JButton btModificar;
-	JButton btSalir;
+	public JButton btInsertar;
+	public JButton btBuscar;
+	public JButton btListado;
+	public JButton btBorrar;
+	public JButton btModificar;
+	public JButton btSalir;
+	public JButton btLimpiar;
 	
 	//DEFINICION DE LOS OBJETOS DE PARA LA TABLA
-	JScrollPane scroll; //Panel de scroll que contiene la tabla
-	Object[][] datos; //Cuerpo de la tabla
-	String[] cabecera; //Cabecera de la tabla
-	DefaultTableModel dtm; //Con esto se une la tabla y la cabecera
-	JTable tabla; //La propia tabla
+	public JScrollPane scroll; //Panel de scroll que contiene la tabla
+	public Object[][] datos; //Cuerpo de la tabla
+	public String[] cabecera; //Cabecera de la tabla
+	public DefaultTableModel dtm; //Con esto se une la tabla y la cabecera
+	public JTable tabla; //La propia tabla
 
 	/******************************** MÉTODOS ********************************/
 	//CONSTRUCTOR
@@ -98,11 +100,14 @@ public class View {
 		tabla = new JTable(dtm);
 		/************************ BOTONES ************************/
 		btConectar = new JButton("Conectar");
+		
+		btBuscar = new JButton("Buscar");
 		btInsertar = new JButton("Insetar");
 		btListado = new JButton("Listar");
 		btBorrar = new JButton("Borrar");
 		btModificar = new JButton("Modificar");
 		btSalir = new JButton("Salir");
+		btLimpiar = new JButton("Limpiar");
 	}
 	
 	public void colocarComponentesLogin() {
@@ -143,7 +148,7 @@ public class View {
 	}
 	
 	public void colocarComponentesOperaciones() {
-		ventana.setBounds(100,100,600,300); //Dimensiones de la ventana
+		ventana.setBounds(100,100,600,500); //Dimensiones de la ventana
 		ventana.setTitle("BASE DE DATOS CON ENTORNO GRÁFICO"); //Barra de título
 		
 		SpringLayout sp = new SpringLayout();
@@ -206,26 +211,34 @@ public class View {
 		sp.putConstraint(SpringLayout.EAST, scroll,  -10, SpringLayout.EAST, panelOperaciones);
 		sp.putConstraint(SpringLayout.SOUTH, scroll, -50, SpringLayout.SOUTH, panelOperaciones);
 		
-		/************************ BOTONES ************************/        
+		/************************ BOTONES ************************/     
+		panelOperaciones.add(btLimpiar);
+		sp.putConstraint(SpringLayout.NORTH, btLimpiar, 65, SpringLayout.NORTH, panelOperaciones);
+        sp.putConstraint(SpringLayout.WEST, btLimpiar, 390, SpringLayout.WEST, panelOperaciones);      
+
 		panelOperaciones.add(btInsertar);
         sp.putConstraint(SpringLayout.SOUTH, btInsertar, -10, SpringLayout.SOUTH, panelOperaciones);
-        sp.putConstraint(SpringLayout.WEST, btInsertar, 40, SpringLayout.WEST, panelOperaciones);      
+        sp.putConstraint(SpringLayout.WEST, btInsertar, 10, SpringLayout.WEST, panelOperaciones);      
 
 		panelOperaciones.add(btListado);
         sp.putConstraint(SpringLayout.SOUTH, btListado, -10, SpringLayout.SOUTH, panelOperaciones);
-        sp.putConstraint(SpringLayout.WEST, btListado, 140, SpringLayout.WEST, panelOperaciones);
+        sp.putConstraint(SpringLayout.WEST, btListado, 110, SpringLayout.WEST, panelOperaciones);
+        
+        panelOperaciones.add(btBuscar);
+        sp.putConstraint(SpringLayout.SOUTH, btBuscar, -10, SpringLayout.SOUTH, panelOperaciones);
+        sp.putConstraint(SpringLayout.WEST, btBuscar, 200, SpringLayout.WEST, panelOperaciones);
         
 		panelOperaciones.add(btBorrar);
         sp.putConstraint(SpringLayout.SOUTH, btBorrar, -10, SpringLayout.SOUTH, panelOperaciones);
-        sp.putConstraint(SpringLayout.WEST, btBorrar, 240, SpringLayout.WEST, panelOperaciones);
+        sp.putConstraint(SpringLayout.WEST, btBorrar, 300, SpringLayout.WEST, panelOperaciones);
         
 		panelOperaciones.add(btModificar);
         sp.putConstraint(SpringLayout.SOUTH, btModificar, -10, SpringLayout.SOUTH, panelOperaciones);
-        sp.putConstraint(SpringLayout.WEST, btModificar, 340, SpringLayout.WEST, panelOperaciones);
+        sp.putConstraint(SpringLayout.WEST, btModificar, 390, SpringLayout.WEST, panelOperaciones);
         
 		panelOperaciones.add(btSalir);
         sp.putConstraint(SpringLayout.SOUTH, btSalir, -10, SpringLayout.SOUTH, panelOperaciones);
-        sp.putConstraint(SpringLayout.WEST, btSalir, 460, SpringLayout.WEST, panelOperaciones);
+        sp.putConstraint(SpringLayout.WEST, btSalir, 520, SpringLayout.WEST, panelOperaciones);
         ventana.add(panelOperaciones);
         //Hacemos visible la ventana
         ventana.setVisible(true);
@@ -233,17 +246,21 @@ public class View {
 	}
 	
 	public void conectarControlador(Controller c) {
-		
-
 		//LOGIN
 		btConectar.addActionListener(c);
 		btConectar.setActionCommand("CONECTAR");
+		//LIMPIAR
+		btLimpiar.addActionListener(c);
+		btLimpiar.setActionCommand("LIMPIAR");
 		//INSERTAR
 		btInsertar.addActionListener(c);
 		btInsertar.setActionCommand("INSERTAR");
 		//LISTAR
 		btListado.addActionListener(c);
 		btListado.setActionCommand("LISTAR");
+		//BUSCAR
+		btBuscar.addActionListener(c);
+		btBuscar.setActionCommand("BUSCAR");
 		//BORRAR
 		btBorrar.addActionListener(c);
 		btBorrar.setActionCommand("BORRAR");
