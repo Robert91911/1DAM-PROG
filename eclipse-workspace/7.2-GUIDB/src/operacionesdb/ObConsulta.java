@@ -1,7 +1,5 @@
 package operacionesdb;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -25,10 +23,8 @@ public class ObConsulta {
 		String nombre, apellido;
 		int edad;
 		try {
-			//Creo el Statement con la conexion realizada desde la Bd creada
 			Statement stmt = Bd.getConexion().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
 			
-			//Ejecuto una consulta sql y la almaceno
 			ResultSet resultadoConsulta = stmt.executeQuery("SELECT * FROM DatosPersonales");
 			
 			while(resultadoConsulta.next()){

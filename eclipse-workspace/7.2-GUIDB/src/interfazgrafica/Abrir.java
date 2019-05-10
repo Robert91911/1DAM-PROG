@@ -2,15 +2,20 @@ package interfazgrafica;
 
 import java.util.Scanner;
 
+/*
 import operacionesdb.ObBorrado;
 import operacionesdb.ObConsulta;
 import operacionesdb.ObInsercion;
 import operacionesdb.ObModificacion;
 import operacionesdb.ObRegistro;
+*/
 
-public class Abrir {
-static Scanner sc = new Scanner(System.in);
-	public static void main(String[] args) {
+public class Abrir 
+{
+	static Scanner sc = new Scanner(System.in);
+	
+	public static void main(String[] args) 
+	{
 		 View vista  = new View();
 		 Controller contr = new Controller(vista);
 		 vista.conectarControlador(contr);
