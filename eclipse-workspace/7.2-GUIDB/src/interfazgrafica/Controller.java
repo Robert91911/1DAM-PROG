@@ -27,7 +27,7 @@ public class Controller implements ActionListener, MouseListener {
 	
 	/********************************************  LISTENERS  ***************************************************/
 	@Override
-	public void actionPerformed(ActionEvent arg0) 
+	public void actionPerformed(ActionEvent arg0)
 	{
 		String comando = arg0.getActionCommand();
 		switch (comando) 

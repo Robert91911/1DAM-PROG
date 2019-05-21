@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class View {
 	
-	private JFrame ventana;
+	public JFrame ventana;
 	private Container contPrincipal;
 	
 	/******************************  LABELS  ******************************/
@@ -23,10 +23,10 @@ public class View {
 	private JLabel lbSentencia;
 	
 	/******************************  CAMPOS DE TEXTO  ******************************/
-	private JTextField txtUsuario;
-	private JTextField txtContrasenya;
-	private JTextField txtURL;
-	private JTextField txtSentencia;
+	public JTextField txtUsuario;
+	public JTextField txtContrasenya;
+	public JTextField txtURL;
+	public JTextField txtSentencia;
 	
 	/******************************  BOTONES  ******************************/
 	private JButton btResetConex;

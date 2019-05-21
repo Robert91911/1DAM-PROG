@@ -19,7 +19,7 @@ public class Bd {
     
     public Bd(){
     	try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.jdbsc.Driver");
 		} catch (ClassNotFoundException e) {
 			System.out.println("Driver no encontrado " + e.getMessage());
 			System.exit(-1);
